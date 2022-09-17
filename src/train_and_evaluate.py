@@ -53,6 +53,25 @@ def train_and_evaluate(config_path):
     print("  MAE: %s" % mae)
     print("  R2: %s" % r2)
 
+    scores_file=config["reports"]["scores"]
+    params_file=config["reports"]["params"]
+
+    with open(scores_file,"w") as f:
+        score={
+            "rmse":rmse,
+            "mae":mae,
+            "r2":r2
+        }
+        json.dump(score,f,indent=4)
+
+    
+    with open(params_file,"w") as f:
+        params={
+            "l1_ration":l1_ratio,
+            "alpha":alpha
+        }
+        json.dump(params,f,indent=4)
+
     os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir, "model.joblib")
 
