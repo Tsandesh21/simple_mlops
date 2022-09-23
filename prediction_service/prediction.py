@@ -73,6 +73,7 @@ def api_response(dict_request):
             data = np.array([list(dict_request.values())])
             response = predict(data)
             response = {"response":response}
+            return response
     except Exception as e:
         response = {"the expected range" : get_schema(), "response": str(e)}
         return response
